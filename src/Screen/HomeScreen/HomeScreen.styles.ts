@@ -9,7 +9,6 @@ const styles: Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: brandColor.softGreen,
-    paddingHorizontal: moderateScale(18),
   },
   textWelcome: {
     fontSize: moderateScale(42),

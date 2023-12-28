@@ -8,7 +8,11 @@ const styles = StyleSheet.create({
   flatlist: {
     flexGrow: 1,
     paddingBottom: moderateScale(12),
-    paddingTop: moderateScale(8),
+    paddingTop: moderateScale(10),
+  },
+  flatlistColumn: {
+    justifyContent: 'space-between',
+    paddingHorizontal: moderateScale(18),
   },
 });
 

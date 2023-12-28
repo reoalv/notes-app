@@ -1,11 +1,22 @@
 import {ScrollView, View} from 'react-native';
 import React from 'react';
-import {DetailScreenProps, RenderFieldProps} from './DetailScreen.types';
+import uuid from 'react-native-uuid';
+import {
+  DetailScreenNavigationProps,
+  DetailScreenProps,
+  OnSaveData,
+  RenderFieldProps,
+} from './DetailScreen.types';
 import styles from './DetailScreen.styles';
 import SimpleInput from '../../Component/SimpleInput/SimpleInput';
 import Constants from '../../Constants/Input';
 import SeparatorHorizontal from '../../Component/SeparatorHorizontal';
 import HeaderDetail from '../../Component/HeaderDetail/HeaderDetail';
+import {useDispatch} from 'react-redux';
+import {deleteNote, setNewNote, updateNote} from '../../Redux/Action/Notes';
+import {Routes} from '../Screen.types';
+import {AnyActionFn} from '../../Redux/Store';
+import {CommonActions} from '@react-navigation/native';
 
 const _renderTitleField = ({setters, value, isFinish}: RenderFieldProps) => {
   return (
@@ -35,39 +46,108 @@ const _renderBodyField = ({setters, value, isFinish}: RenderFieldProps) => {
   );
 };
 
+const resetToHome = (navigation: DetailScreenNavigationProps) => {
+  navigation.dispatch(
+    CommonActions.reset({
+      index: 0,
+      routes: [{name: Routes.HomeScreen}],
+    }),
+  );
+};
+
+const onSaveData = (props: OnSaveData) => async () => {
+  const {
+    dispatch,
+    navigation,
+    userId,
+    textTitle,
+    textBody,
+    isFinish,
+    isNew = false,
+  } = props;
+
+  if (isNew) {
+    await dispatch(
+      setNewNote({
+        id: userId,
+        title: textTitle,
+        body: textBody,
+        isFinished: isFinish,
+      }),
+    );
+  } else {
+    await dispatch(
+      updateNote({
+        id: userId,
+        title: textTitle,
+        body: textBody,
+        isFinished: isFinish,
+      }),
+    );
+  }
+
+  resetToHome(navigation);
+};
+
+const onDelete =
+  (
+    dispatch: AnyActionFn,
+    userId: string,
+    navigation: DetailScreenNavigationProps,
+  ) =>
+  async () => {
+    await dispatch(deleteNote(userId));
+    resetToHome(navigation);
+  };
+
 const DetailScreen = (props: DetailScreenProps) => {
   const {
     route: {params},
     navigation,
   } = props;
+  const dispatch = useDispatch();
   const [textTitle, setTextTitle] = React.useState<string>(params?.title || '');
   const [textBody, setTextBody] = React.useState<string>(params?.body || '');
   const [isFinish, setIsFinish] = React.useState<boolean>(
     params?.isFinished || false,
   );
+  const userId = params?.id || uuid.v4().toString();
+  const isNew = params?.isNew;
+  const paramSave = {
+    dispatch,
+    navigation,
+    userId,
+    textTitle,
+    textBody,
+    isFinish,
+    isNew,
+  };
 
   return (
     <>
       <HeaderDetail
         onPressBack={() => navigation.goBack()}
-        onPressDelete={() => {}}
-        onPressSave={() => {}}
+        onPressDelete={onDelete(dispatch, userId, navigation)}
+        onPressSave={onSaveData(paramSave)}
         onPressDone={() => setIsFinish(v => !v)}
         isDone={isFinish}
+        isNew={params?.isNew}
       />
-      <ScrollView contentContainerStyle={styles.container}>
-        {_renderTitleField({
-          value: textTitle,
-          setters: setTextTitle,
-          isFinish: isFinish,
-        })}
-        <SeparatorHorizontal />
-        {_renderBodyField({
-          value: textBody,
-          setters: setTextBody,
-          isFinish: isFinish,
-        })}
-      </ScrollView>
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.containerScroll}>
+          {_renderTitleField({
+            value: textTitle,
+            setters: setTextTitle,
+            isFinish: isFinish,
+          })}
+          <SeparatorHorizontal />
+          {_renderBodyField({
+            value: textBody,
+            setters: setTextBody,
+            isFinish: isFinish,
+          })}
+        </ScrollView>
+      </View>
     </>
   );
 };

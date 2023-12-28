@@ -1,15 +1,17 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Header from '../Header';
 import {AntDesign} from '../../Utils/Icons';
 import {moderateScale} from 'react-native-size-matters';
 import Colors from '../../Utils/Color';
+import {HeaderDetailProps} from './HeaderDetail.types';
+import styles from './HeaderDetail.styles';
 
 const _renderLeftComponent = (onPressBack: () => void) => (
   <TouchableOpacity activeOpacity={0.5} onPress={onPressBack}>
     <AntDesign
       name="doubleleft"
-      size={moderateScale(24)}
+      size={moderateScale(28)}
       color={Colors.brandColor.darkGreen}
     />
   </TouchableOpacity>
@@ -49,86 +51,37 @@ const _renderRightComponent = (
   onPressDelete: () => void,
   onPressDone: () => void,
   isDone: boolean,
+  isNew: boolean,
 ) => (
   <View style={{flexDirection: 'row'}}>
     {_contentIsDone(isDone, onPressDone)}
-    {_contentDelete(onPressDelete)}
+    {!isNew && _contentDelete(onPressDelete)}
     {_contentSave(onPressSave)}
   </View>
 );
 
-type HeaderDetailProps = {
-  onPressBack: () => void;
-  onPressDelete: () => void;
-  onPressSave: () => void;
-  onPressDone: () => void;
-  isDone: boolean;
-};
-
 const HeaderDetail = (props: HeaderDetailProps) => {
+  const {
+    isDone,
+    isNew = true,
+    onPressBack,
+    onPressDelete,
+    onPressDone,
+    onPressSave,
+  } = props;
   return (
     <Header
       bgColor={Colors.brandColor.softGreen}
-      leftComponent={_renderLeftComponent(props.onPressBack)}
+      leftComponent={_renderLeftComponent(onPressBack)}
       righComponent={_renderRightComponent(
-        props.onPressSave,
-        props.onPressDelete,
-        props.onPressDone,
-        props.isDone,
+        onPressSave,
+        onPressDelete,
+        onPressDone,
+        isDone,
+        isNew,
       )}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  containerContentSave: {
-    paddingVertical: moderateScale(2),
-    paddingHorizontal: moderateScale(8),
-    backgroundColor: 'green',
-    borderRadius: moderateScale(4),
-  },
-  textContentSave: {
-    fontSize: moderateScale(16),
-    fontWeight: '600',
-    color: Colors.neutralColor.white,
-  },
-  containerContentDelete: {
-    paddingVertical: moderateScale(2),
-    paddingHorizontal: moderateScale(8),
-    backgroundColor: Colors.commonColor.dangerRed,
-    borderRadius: moderateScale(4),
-    marginRight: moderateScale(6),
-  },
-  textContentDelete: {
-    fontSize: moderateScale(16),
-    fontWeight: '600',
-    color: Colors.neutralColor.white,
-  },
-  containerIsDone: {
-    paddingVertical: moderateScale(2),
-    paddingHorizontal: moderateScale(8),
-    borderWidth: moderateScale(1),
-    borderColor: Colors.brandColor.darkGreen,
-    borderRadius: moderateScale(4),
-    marginRight: moderateScale(6),
-  },
-  containerNotDone: {
-    paddingVertical: moderateScale(2),
-    paddingHorizontal: moderateScale(8),
-    backgroundColor: Colors.brandColor.darkGreen,
-    borderRadius: moderateScale(4),
-    marginRight: moderateScale(6),
-  },
-  textContentIsDone: {
-    fontSize: moderateScale(16),
-    fontWeight: '600',
-    color: Colors.brandColor.darkGreen,
-  },
-  textContentNotDone: {
-    fontSize: moderateScale(16),
-    fontWeight: '600',
-    color: Colors.neutralColor.white,
-  },
-});
 
 export default HeaderDetail;

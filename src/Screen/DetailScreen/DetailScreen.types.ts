@@ -1,5 +1,6 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Routes, RoutesStackParams} from '../Screen.types';
+import {AnyActionFn} from '../../Redux/Store';
 
 export type DetailScreenNavigationProps = NativeStackNavigationProp<
   RoutesStackParams,
@@ -7,9 +8,11 @@ export type DetailScreenNavigationProps = NativeStackNavigationProp<
 >;
 
 export type DetailScreenParams = {
-  title: string;
-  body: string;
-  isFinished: boolean;
+  id?: string;
+  title?: string;
+  body?: string;
+  isFinished?: boolean;
+  isNew: boolean;
 };
 
 export type DetailScreenPropParams = DetailScreenParams | undefined;
@@ -27,4 +30,14 @@ export type RenderFieldProps = {
   value: string;
   setters: StringSetter;
   isFinish?: boolean;
+};
+
+export type OnSaveData = {
+  dispatch: AnyActionFn;
+  navigation: DetailScreenNavigationProps;
+  userId: string;
+  textTitle: string;
+  textBody: string;
+  isFinish: boolean;
+  isNew?: boolean;
 };

@@ -1,19 +1,21 @@
 import {StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import Colors from '../../Utils/Color';
+import {WIDTH_WINDOW} from '../../Utils/Dimension';
 
 const {neutralColor, brandColor, transparent} = Colors;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: (WIDTH_WINDOW - WIDTH_WINDOW / moderateScale(7)) / 2,
+    alignSelf: 'flex-start',
     height: moderateScale(120),
     padding: moderateScale(8),
     borderRadius: moderateScale(6),
     borderWidth: moderateScale(1.5),
     borderColor: brandColor.primaryGreen,
     backgroundColor: neutralColor.white,
-    margin: moderateScale(4),
+    marginVertical: moderateScale(6),
     shadowColor: neutralColor.black,
     elevation: 2,
   },

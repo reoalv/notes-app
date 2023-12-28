@@ -12,9 +12,11 @@ const _renderList = (
     <View style={styles.container}>
       <FlatList
         contentContainerStyle={styles.flatlist}
+        columnWrapperStyle={styles.flatlistColumn}
         data={data}
         renderItem={({item}) => (
           <CardNotes
+            id={item.id}
             title={item.title}
             body={item.body}
             isFinished={item.isFinished}

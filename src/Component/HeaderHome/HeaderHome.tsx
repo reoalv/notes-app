@@ -9,7 +9,7 @@ const _renderLeftComponent = (onPressAdd: () => void) => (
   <TouchableOpacity activeOpacity={0.5} onPress={onPressAdd}>
     <AntDesign
       name="addfile"
-      size={moderateScale(24)}
+      size={moderateScale(28)}
       color={Colors.brandColor.darkGreen}
     />
   </TouchableOpacity>
@@ -20,7 +20,7 @@ const _renderRightComponent = (onPressFilter: () => void) => (
     <TouchableOpacity activeOpacity={0.5} onPress={onPressFilter}>
       <Ionicons
         name="filter"
-        size={moderateScale(24)}
+        size={moderateScale(28)}
         color={Colors.brandColor.darkGreen}
       />
     </TouchableOpacity>
