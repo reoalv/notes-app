@@ -19,6 +19,7 @@ const commonColor = {
 
 const transparent = {
   black025: 'rgba(0,0,0,0.25)',
+  clear: 'rgba(0,0,0,0.25)',
 };
 
 const Colors = {

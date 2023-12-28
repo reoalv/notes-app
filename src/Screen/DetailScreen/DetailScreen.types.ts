@@ -6,17 +6,25 @@ export type DetailScreenNavigationProps = NativeStackNavigationProp<
   Routes.DetailScreen
 >;
 
-export type DetailScreenPropParams =
-  | {
-      title: string;
-      body: string;
-      isFinished: boolean;
-    }
-  | undefined;
+export type DetailScreenParams = {
+  title: string;
+  body: string;
+  isFinished: boolean;
+};
+
+export type DetailScreenPropParams = DetailScreenParams | undefined;
 
 export type DetailScreenProps = {
   navigation: DetailScreenNavigationProps;
   route: {
     params?: DetailScreenPropParams;
   };
+};
+
+export type StringSetter = React.Dispatch<React.SetStateAction<string>>;
+
+export type RenderFieldProps = {
+  value: string;
+  setters: StringSetter;
+  isFinish?: boolean;
 };

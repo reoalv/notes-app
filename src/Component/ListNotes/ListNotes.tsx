@@ -8,7 +8,6 @@ const _renderList = (
   data: ListNotesProps['data'],
   onPress: ListNotesProps['onPress'],
 ) => {
-  console.log('testt');
   return (
     <View style={styles.container}>
       <FlatList

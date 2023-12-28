@@ -15,3 +15,5 @@ export type HomeScreenNavigationProps = NativeStackNavigationProp<
 export type HomeScreenProps = {
   navigation: HomeScreenNavigationProps;
 };
+
+export type AnySetter = React.Dispatch<React.SetStateAction<any>>;

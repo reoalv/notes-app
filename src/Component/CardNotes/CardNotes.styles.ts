@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
     borderColor: brandColor.primaryGreen,
     backgroundColor: neutralColor.white,
     margin: moderateScale(4),
+    shadowColor: neutralColor.black,
+    elevation: 2,
   },
   title: {
     fontSize: moderateScale(16),

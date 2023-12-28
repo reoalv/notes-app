@@ -14,7 +14,7 @@ const CardNotes = (props: CardProps & CardOptProps) => {
   const {title, body, isFinished, onPress} = props;
   return (
     <TouchableOpacity
-      activeOpacity={0.6}
+      activeOpacity={0.8}
       onPress={() => onPress()}
       style={styles.container}>
       <Text numberOfLines={1} style={styles.title}>
