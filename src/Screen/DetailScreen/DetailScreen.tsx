@@ -1,6 +1,7 @@
 import {ScrollView, View} from 'react-native';
 import React from 'react';
 import uuid from 'react-native-uuid';
+import {CommonActions} from '@react-navigation/native';
 import {
   DetailScreenNavigationProps,
   DetailScreenProps,
@@ -16,7 +17,7 @@ import {useDispatch} from 'react-redux';
 import {deleteNote, setNewNote, updateNote} from '../../Redux/Action/Notes';
 import {Routes} from '../Screen.types';
 import {AnyActionFn} from '../../Redux/Store';
-import {CommonActions} from '@react-navigation/native';
+import ModalViewSimple from '../../Component/ModalViewSimple';
 
 const _renderTitleField = ({setters, value, isFinish}: RenderFieldProps) => {
   return (
@@ -106,6 +107,7 @@ const DetailScreen = (props: DetailScreenProps) => {
     navigation,
   } = props;
   const dispatch = useDispatch();
+  const [popupDelete, setIsPopupDelete] = React.useState<boolean>(false);
   const [textTitle, setTextTitle] = React.useState<string>(params?.title || '');
   const [textBody, setTextBody] = React.useState<string>(params?.body || '');
   const [isFinish, setIsFinish] = React.useState<boolean>(
@@ -127,7 +129,7 @@ const DetailScreen = (props: DetailScreenProps) => {
     <>
       <HeaderDetail
         onPressBack={() => navigation.goBack()}
-        onPressDelete={onDelete(dispatch, userId, navigation)}
+        onPressDelete={() => setIsPopupDelete(true)}
         onPressSave={onSaveData(paramSave)}
         onPressDone={() => setIsFinish(v => !v)}
         isDone={isFinish}
@@ -148,6 +150,13 @@ const DetailScreen = (props: DetailScreenProps) => {
           })}
         </ScrollView>
       </View>
+      {popupDelete && (
+        <ModalViewSimple
+          isVisible={popupDelete}
+          onRequestClose={() => setIsPopupDelete(false)}
+          onPressDelete={onDelete(dispatch, userId, navigation)}
+        />
+      )}
     </>
   );
 };

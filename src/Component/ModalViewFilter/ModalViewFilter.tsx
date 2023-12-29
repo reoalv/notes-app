@@ -12,7 +12,7 @@ import {ModalViewProps} from './ModalViewFilter.types';
 import styles from './ModalViewFilter.styles';
 import FilterChoices from '../FilterChoices';
 
-const ModalViewAnimate = (props: ModalViewProps) => {
+const ModalViewFilter = (props: ModalViewProps) => {
   const {layoutData, close, onPressSubmit, filterFinish, filterNotFinish} =
     props;
   const {x, y, _width, _height} = layoutData;
@@ -49,7 +49,7 @@ const ModalViewAnimate = (props: ModalViewProps) => {
             <Animated.View
               style={[
                 StyleSheet.absoluteFill,
-                {backgroundColor: Colors.transparent.clear},
+                {backgroundColor: Colors.transparent.black025},
               ]}
             />
           </TouchableWithoutFeedback>
@@ -80,4 +80,4 @@ const ModalViewAnimate = (props: ModalViewProps) => {
   );
 };
 
-export default ModalViewAnimate;
+export default ModalViewFilter;

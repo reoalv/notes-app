@@ -11,7 +11,7 @@ const RoutesScreen = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={{headerShown: false, animation: 'fade'}}
         initialRouteName={Routes.HomeScreen}>
         <Stack.Screen name={Routes.HomeScreen} component={HomeScreen} />
         <Stack.Screen name={Routes.DetailScreen} component={DetailScreen} />
