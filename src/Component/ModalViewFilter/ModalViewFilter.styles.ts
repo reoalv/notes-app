@@ -1,9 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import Colors from '../../Utils/Color';
-import {HEIGHT_WINDOW, WIDTH_WINDOW} from '../../Utils/Dimension';
-
-const headHeight = HEIGHT_WINDOW * 0.1;
+import {WIDTH_WINDOW, headHeight} from '../../Utils/Dimension';
 
 const styles = StyleSheet.create({
   submit: {
@@ -19,8 +17,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderWidth: moderateScale(1),
     borderColor: Colors.neutralColor.grey,
-    borderRadius: moderateScale(6),
+    borderRadius: moderateScale(12),
     borderTopRightRadius: 0,
+    paddingTop: moderateScale(6),
   },
   containerExpand: {
     minHeight: moderateScale(200),
