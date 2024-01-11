@@ -7,18 +7,20 @@ import {Routes} from '../Screen.types';
 import HeaderHome from '../../Component/HeaderHome';
 import {moderateScale} from 'react-native-size-matters';
 import ModalViewFilter from '../../Component/ModalViewFilter';
-import {WIDTH_WINDOW} from '../../Utils/Dimension';
+import {HEIGHT_WINDOW, WIDTH_WINDOW} from '../../Utils/Dimension';
 import {CardProps} from '../../Component/CardNotes/CardNotes.types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../Redux/Store';
 import EmptyView from '../../Component/EmptyView/EmptyView';
 
 const onFilter = (setLayout: AnySetter) => {
+  const headHeight = HEIGHT_WINDOW * 0.1;
+
   setLayout({
     _height: moderateScale(30),
     _width: moderateScale(30),
     x: WIDTH_WINDOW - moderateScale(60),
-    y: moderateScale(30),
+    y: headHeight,
   });
 };
 

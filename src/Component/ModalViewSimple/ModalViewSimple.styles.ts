@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   container: {
     minHeight: moderateScale(100),
-    width: WIDTH_WINDOW / 2,
+    width: WIDTH_WINDOW * 0.6,
     top: HEIGHT_WINDOW / 3,
     position: 'absolute',
     backgroundColor: Colors.neutralColor.softGrey,

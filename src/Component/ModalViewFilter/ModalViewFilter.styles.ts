@@ -1,7 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import Colors from '../../Utils/Color';
-import {WIDTH_WINDOW} from '../../Utils/Dimension';
+import {HEIGHT_WINDOW, WIDTH_WINDOW} from '../../Utils/Dimension';
+
+const headHeight = HEIGHT_WINDOW * 0.1;
 
 const styles = StyleSheet.create({
   submit: {
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
   containerExpand: {
     minHeight: moderateScale(200),
     width: WIDTH_WINDOW / 2,
-    top: moderateScale(30),
+    top: headHeight,
     right: moderateScale(30),
     position: 'absolute',
   },
