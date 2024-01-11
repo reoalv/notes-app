@@ -28,4 +28,10 @@
 #endif
 }
 
+- (UIView *)createRootViewWithBridge:(RCTBridge *)bridge moduleName:(NSString *)moduleName initProps:(NSDictionary *)initProps {
+  UIView *rootView = [super createRootViewWithBridge:bridge moduleName:moduleName initProps:initProps];
+  rootView.backgroundColor = [UIColor colorWithRed: 0.88 green: 0.95 blue: 0.92 alpha: 1.00];
+  return rootView;
+}
+
 @end
